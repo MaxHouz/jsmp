@@ -1,0 +1,7 @@
+body {
+  color: red;
+
+  & .specific {
+    transition: background-color 5s ease-in 3s;
+  }
+}
