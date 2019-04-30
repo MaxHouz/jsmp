@@ -5,13 +5,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = function() {
     return {
         entry: {
-            common: './src/common/common.js',
             admin: './src/admin/admin.js',
             visitor: './src/visitor/visitor.js'
         },
         output: {
             path: path.join(__dirname, '../dist'),
-            filename: "./[name]/[name].js"
+            filename: "./[name].js"
         },
         resolve: {
             extensions: ['.ts', '.js']
@@ -47,11 +46,18 @@ module.exports = function() {
                 }
             ]
         },
+        optimization: {
+            splitChunks: {
+                cacheGroups: {
+                    commons: { test:  /[\\/]node_modules[\\/]/, name: 'common', chunks: "all"}
+                }
+            }
+        },
         plugins: [
             new CopyPlugin([
                 { from: './src/index.html' },
-                { from: './src/admin/admin.html', to: './admin' },
-                { from: './src/visitor/visitor.html', to: './visitor' }
+                { from: './src/admin/admin.html'},
+                { from: './src/visitor/visitor.html'}
             ]),
             new MiniCssExtractPlugin({
                 filename: './styles/styles.css'

@@ -1,5 +1,11 @@
-import { ADMIN_TITLE } from "./admin";
+import { ADMIN_TITLE, adminFunction } from "./admin";
+import { times } from "lodash";
 
 const adminTitle = document.querySelector('.secondary_title');
 
-adminTitle.innerHTML = ADMIN_TITLE;
+document.addEventListener("DOMContentLoaded", () => {
+    adminTitle.innerHTML = ADMIN_TITLE;
+    adminFunction();
+
+    times(5, () => console.log('admin'));
+});
