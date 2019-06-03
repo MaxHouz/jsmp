@@ -1,4 +1,4 @@
-import {BehaviorSubject, combineLatest, fromEvent, Subject} from "rxjs";
+import { BehaviorSubject, combineLatest, fromEvent, Subject } from "rxjs";
 import { map, debounceTime, switchMap } from "rxjs/operators";
 
 import './styles.css';
