@@ -1,31 +1,33 @@
-import { HttpService as httpService } from "./http.service";
 import { map } from "rxjs/operators";
+import { fromPromise } from "rxjs/internal-compatibility";
+import { Post } from "../models/post.model";
+
+const POSTS_URL = 'https://jsonplaceholder.typicode.com/posts';
 
 export function loadPosts() {
-    return httpService.getData('https://jsonplaceholder.typicode.com/posts').pipe(
-        map((data) => convertPostsToMarkup(data))
-    );
+    const promise = fetch(POSTS_URL).then(response => response.json());
+
+    return fromPromise(promise)
+        .pipe(
+            map(data => data.map(
+                post => new Post(
+                    post.userId,
+                    post.id,
+                    post.title,
+                    post.body
+                )))
+        );
 }
 
-export function filterBySelector(query, parentElem) {
-    parentElem.innerHTML = '';
-    httpService.getData('https://jsonplaceholder.typicode.com/posts').pipe(
-        map((data) => data.filter(
-            post => post.title.includes(query)
-        )),
-        map((data) => convertPostsToMarkup(data))
-    ).subscribe((markUp) => parentElem.innerHTML = markUp);
+export function convertPostsToMarkup(posts) {
+    return posts.reduce((acc, cur) =>
+        `${acc}
+            <div>
+                <h2>${cur.title}</h2>
+                <p>${cur.body}</p>
+            </div>`, '');
 }
 
-
-function convertPostsToMarkup(posts) {
-    let postsMarkup = '';
-    posts.forEach(post => {
-        postsMarkup += `
-                    <div>
-                        <h2>${post.title}</h2>
-                        <p>${post.body}</p>
-                    </div>`;
-    });
-    return postsMarkup;
+export function filterPosts(query, posts) {
+    return posts.filter(post => post.title.includes(query));
 }
