@@ -18,9 +18,9 @@ export enum NotesActions {
     UDPATE_NOTE_SUCCESS = '[Notes] UDPATE_NOTE_SUCCESS',
     UPDATE_NOTE_ERROR = '[Notes] UPDATE_NOTE_ERROR',
 
-    DELETE_NOTE = '[Notes] UPDATE_NOTE',
-    DELETE_NOTE_SUCCESS = '[Notes] UDPATE_NOTE_SUCCESS',
-    DELETE_NOTE_ERROR = '[Notes] UPDATE_NOTE_ERROR',
+    DELETE_NOTE = '[Notes] DELETE_NOTE',
+    DELETE_NOTE_SUCCESS = '[Notes] DELETE_NOTE_SUCCESS',
+    DELETE_NOTE_ERROR = '[Notes] DELETE_NOTE_ERROR'
 }
 
 export interface GetNotesList extends Action<NotesActions.GET_NOTES_LIST> {
@@ -48,7 +48,8 @@ export interface GetNoteSuccess extends Action<NotesActions.GET_NOTE_SUCCESS>  {
 }
 
 export interface GetNoteError extends Action<NotesActions.GET_NOTE_ERROR>  {
-    type: NotesActions.GET_NOTE_ERROR
+    type: NotesActions.GET_NOTE_ERROR,
+    payload: string
 }
 
 export interface AddNote extends Action<NotesActions.ADD_NOTE>  {
@@ -58,10 +59,12 @@ export interface AddNote extends Action<NotesActions.ADD_NOTE>  {
 
 export interface AddNoteSuccess extends Action<NotesActions.ADD_NOTE_SUCCESS>  {
     type: NotesActions.ADD_NOTE_SUCCESS
+    payload: NoteModel
 }
 
 export interface AddNoteError extends Action<NotesActions.ADD_NOTE_ERROR>  {
-    type: NotesActions.ADD_NOTE_ERROR
+    type: NotesActions.ADD_NOTE_ERROR,
+    payload: string
 }
 
 export interface UpdateNote extends Action<NotesActions.UPDATE_NOTE>  {
@@ -70,11 +73,13 @@ export interface UpdateNote extends Action<NotesActions.UPDATE_NOTE>  {
 }
 
 export interface UpdateNoteSuccess extends Action<NotesActions.UDPATE_NOTE_SUCCESS>  {
-    type: NotesActions.UDPATE_NOTE_SUCCESS
+    type: NotesActions.UDPATE_NOTE_SUCCESS,
+    payload: NoteModel
 }
 
 export interface UpdateNoteError extends Action<NotesActions.UPDATE_NOTE_ERROR>  {
     type: NotesActions.UPDATE_NOTE_ERROR
+    payload: string
 }
 
 export interface DeleteNote extends Action<NotesActions.DELETE_NOTE>  {
@@ -83,11 +88,13 @@ export interface DeleteNote extends Action<NotesActions.DELETE_NOTE>  {
 }
 
 export interface DeleteNoteSuccess extends Action<NotesActions.DELETE_NOTE_SUCCESS>  {
-    type: NotesActions.DELETE_NOTE_SUCCESS
+    type: NotesActions.DELETE_NOTE_SUCCESS,
+    payload: number
 }
 
 export interface DeleteNoteError extends Action<NotesActions.DELETE_NOTE_ERROR>  {
     type: NotesActions.DELETE_NOTE_ERROR
+    payload: string
 }
 
 export type NoteActionsType = GetNotesList

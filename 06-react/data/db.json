@@ -1,20 +1,25 @@
 {
-    "notes": [
-        {
-            "title": "First note",
-            "text": "fdasfdasfads",
-            "date": null,
-            "done": false,
-            "archieved": false,
-            "id": 1
-        },
-        {
-            "title": "Second note",
-            "text": "Fddsfssdfdfs",
-            "date": null,
-            "done": false,
-            "archieved": false,
-            "id": 2
-        }
-    ]
+  "notes": [
+    {
+      "title": "First note",
+      "text": "lorem  gdsadfsf bdggzdf cxv fbdfg dbgcvga ggxcvgzfxvcvdzvxbxlorem  gdsadfsf bdggzdf cxv fbdfg dbgcvga ggxcv   gzfxvcvdzvxbx",
+      "done": false,
+      "archieved": false,
+      "id": 1
+    },
+    {
+      "title": "Second note",
+      "text": "Fddsfssdfdfs",
+      "done": false,
+      "archieved": true,
+      "id": 2
+    },
+    {
+      "title": "fdsagdfsgfhgffd",
+      "text": "jgd ccv x shgvvbcx",
+      "done": false,
+      "archieved": true,
+      "id": 4
+    }
+  ]
 }
