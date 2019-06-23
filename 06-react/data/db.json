@@ -1,0 +1,20 @@
+{
+    "notes": [
+        {
+            "title": "First note",
+            "text": "fdasfdasfads",
+            "date": null,
+            "done": false,
+            "archieved": false,
+            "id": 1
+        },
+        {
+            "title": "Second note",
+            "text": "Fddsfssdfdfs",
+            "date": null,
+            "done": false,
+            "archieved": false,
+            "id": 2
+        }
+    ]
+}
