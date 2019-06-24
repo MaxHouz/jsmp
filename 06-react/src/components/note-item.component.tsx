@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { NoteModel } from '../models/note-model';
 import { Card, Button } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 interface NoteProps {
     note: NoteModel,
@@ -11,14 +12,16 @@ interface NoteProps {
 }
 
 export class NoteItemComponent extends React.Component<NoteProps> {
+
     render() {
         const { title, text, done, archieved, id } = this.props.note;
 
         return (
-            <Card>
+            <Card className='note-card'>
                 <Card.Content>
-                <Card.Header textAlign="center">{title}</Card.Header>
-                <Card.Description>{text}</Card.Description>
+                    <Card.Header textAlign="center">{title}</Card.Header>
+                    <Card.Description>{text}</Card.Description>
+                    <Link className='note-card__edit' to={{ pathname: `/edit/${id}` }}>Edit</Link>
                 </Card.Content>
                 <Card.Content extra>
                     <Button
@@ -43,7 +46,7 @@ export class NoteItemComponent extends React.Component<NoteProps> {
                           </Button>)
                     }
                     <Button
-                    onClick={() => this.props.onNoteDelete(id as number)} 
+                        onClick={() => this.props.onNoteDelete(id as number)} 
                         icon="remove" 
                         color="red" 
                         floated="right">

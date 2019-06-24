@@ -6,10 +6,6 @@ export enum NotesActions {
     GET_NOTES_LIST_SUCCESS = '[Notes] GET_NOTES_LIST_SUCCESS',
     GET_NOTES_LIST_ERROR = '[Notes] GET_NOTES_LIST_ERROR',
 
-    GET_NOTE = '[Notes] GET_NOTE',
-    GET_NOTE_SUCCESS = '[Notes] GET_NOTE_SUCCESS',
-    GET_NOTE_ERROR = '[Notes] GET_NOTE_ERROR',
-
     ADD_NOTE = '[Notes] ADD_NOTE',
     ADD_NOTE_SUCCESS = '[Notes] ADD_NOTE_SUCCES',
     ADD_NOTE_ERROR = '[Notes] ADD_NOTE_ERROR',
@@ -20,89 +16,78 @@ export enum NotesActions {
 
     DELETE_NOTE = '[Notes] DELETE_NOTE',
     DELETE_NOTE_SUCCESS = '[Notes] DELETE_NOTE_SUCCESS',
-    DELETE_NOTE_ERROR = '[Notes] DELETE_NOTE_ERROR'
+    DELETE_NOTE_ERROR = '[Notes] DELETE_NOTE_ERROR',
+
+    SEARCH = '[Notes] SEARCH'
 }
 
 export interface GetNotesList extends Action<NotesActions.GET_NOTES_LIST> {
-    type: NotesActions.GET_NOTES_LIST
+    type: NotesActions.GET_NOTES_LIST;
 }
 
-export interface GetNotesListSuccess extends Action<NotesActions.GET_NOTES_LIST_SUCCESS>  {
-    type: NotesActions.GET_NOTES_LIST_SUCCESS,
-    payload: NoteModel[]
+export interface GetNotesListSuccess extends Action<NotesActions.GET_NOTES_LIST_SUCCESS> {
+    type: NotesActions.GET_NOTES_LIST_SUCCESS;
+    payload: NoteModel[];
 }
 
-export interface GetNotesListError extends Action<NotesActions.GET_NOTES_LIST_ERROR>  {
-    type: NotesActions.GET_NOTES_LIST_ERROR,
-    payload: string
+export interface GetNotesListError extends Action<NotesActions.GET_NOTES_LIST_ERROR> {
+    type: NotesActions.GET_NOTES_LIST_ERROR;
+    payload: string;
 }
 
-export interface GetNote extends Action<NotesActions.GET_NOTE>  {
-    type: NotesActions.GET_NOTE
-    payload: number
+export interface AddNote extends Action<NotesActions.ADD_NOTE> {
+    type: NotesActions.ADD_NOTE;
+    payload: NoteModel;
 }
 
-export interface GetNoteSuccess extends Action<NotesActions.GET_NOTE_SUCCESS>  {
-    type: NotesActions.GET_NOTE_SUCCESS,
-    payload: NoteModel
+export interface AddNoteSuccess extends Action<NotesActions.ADD_NOTE_SUCCESS> {
+    type: NotesActions.ADD_NOTE_SUCCESS;
+    payload: NoteModel;
 }
 
-export interface GetNoteError extends Action<NotesActions.GET_NOTE_ERROR>  {
-    type: NotesActions.GET_NOTE_ERROR,
-    payload: string
+export interface AddNoteError extends Action<NotesActions.ADD_NOTE_ERROR> {
+    type: NotesActions.ADD_NOTE_ERROR;
+    payload: string;
 }
 
-export interface AddNote extends Action<NotesActions.ADD_NOTE>  {
-    type: NotesActions.ADD_NOTE,
-    payload: NoteModel
+export interface UpdateNote extends Action<NotesActions.UPDATE_NOTE> {
+    type: NotesActions.UPDATE_NOTE;
+    payload: NoteModel;
 }
 
-export interface AddNoteSuccess extends Action<NotesActions.ADD_NOTE_SUCCESS>  {
-    type: NotesActions.ADD_NOTE_SUCCESS
-    payload: NoteModel
+export interface UpdateNoteSuccess extends Action<NotesActions.UDPATE_NOTE_SUCCESS> {
+    type: NotesActions.UDPATE_NOTE_SUCCESS;
+    payload: NoteModel;
 }
 
-export interface AddNoteError extends Action<NotesActions.ADD_NOTE_ERROR>  {
-    type: NotesActions.ADD_NOTE_ERROR,
-    payload: string
+export interface UpdateNoteError extends Action<NotesActions.UPDATE_NOTE_ERROR> {
+    type: NotesActions.UPDATE_NOTE_ERROR;
+    payload: string;
 }
 
-export interface UpdateNote extends Action<NotesActions.UPDATE_NOTE>  {
-    type: NotesActions.UPDATE_NOTE,
-    payload: NoteModel
+export interface DeleteNote extends Action<NotesActions.DELETE_NOTE> {
+    type: NotesActions.DELETE_NOTE;
+    payload: number;
 }
 
-export interface UpdateNoteSuccess extends Action<NotesActions.UDPATE_NOTE_SUCCESS>  {
-    type: NotesActions.UDPATE_NOTE_SUCCESS,
-    payload: NoteModel
+export interface DeleteNoteSuccess extends Action<NotesActions.DELETE_NOTE_SUCCESS> {
+    type: NotesActions.DELETE_NOTE_SUCCESS;
+    payload: number;
 }
 
-export interface UpdateNoteError extends Action<NotesActions.UPDATE_NOTE_ERROR>  {
-    type: NotesActions.UPDATE_NOTE_ERROR
-    payload: string
+export interface DeleteNoteError extends Action<NotesActions.DELETE_NOTE_ERROR> {
+    type: NotesActions.DELETE_NOTE_ERROR;
+    payload: string;
 }
 
-export interface DeleteNote extends Action<NotesActions.DELETE_NOTE>  {
-    type: NotesActions.DELETE_NOTE,
-    payload: number
-}
-
-export interface DeleteNoteSuccess extends Action<NotesActions.DELETE_NOTE_SUCCESS>  {
-    type: NotesActions.DELETE_NOTE_SUCCESS,
-    payload: number
-}
-
-export interface DeleteNoteError extends Action<NotesActions.DELETE_NOTE_ERROR>  {
-    type: NotesActions.DELETE_NOTE_ERROR
-    payload: string
+export interface Search extends Action<NotesActions.SEARCH> {
+    type: NotesActions.SEARCH;
+    payload: string;
 }
 
 export type NoteActionsType = GetNotesList
  | GetNotesListSuccess
  | GetNotesListError
- | GetNote
- | GetNoteSuccess
- | GetNoteError
  | AddNote
  | AddNoteSuccess
  | AddNoteError
@@ -111,4 +96,5 @@ export type NoteActionsType = GetNotesList
  | UpdateNoteError
  | DeleteNote
  | DeleteNoteSuccess
- | DeleteNoteError;
+ | DeleteNoteError
+ | Search;

@@ -6,7 +6,7 @@ import { Card } from 'semantic-ui-react';
 import { NoteModel } from '../models/note-model';
 import * as noteActions from '../@store/notes/notes.actions';
 
-interface NotesComponentProps {
+interface ArchievedNotesComponentProps {
     notes: NoteModel[],
     error: string | null,
     search: string,
@@ -14,7 +14,7 @@ interface NotesComponentProps {
     deleteNote: (id: number) => void
 }
 
-class NotesComponent extends React.Component<NotesComponentProps, any> {
+class ArchievedNotesComponent extends React.Component<ArchievedNotesComponentProps, any> {
 
     private completeNote(note: NoteModel): void {
         this.props.updateNote({
@@ -23,10 +23,10 @@ class NotesComponent extends React.Component<NotesComponentProps, any> {
         });
     }
 
-    private archieveNote(note: NoteModel): void {
+    private dearchieveNote(note: NoteModel): void {
         this.props.updateNote({
             ...note,
-            archieved: true
+            archieved: false
         });
     }
 
@@ -37,20 +37,19 @@ class NotesComponent extends React.Component<NotesComponentProps, any> {
     render() {
         const { notes, search } = this.props;
         return (
-            <Card.Group>
+            <Card.Group className='notes'>
                 {
-                    notes.filter(note => !note.archieved 
-                        && (note.text.toLowerCase().includes(search) || note.title.toLowerCase().includes(search)))
-                    .map(activeNote => {
+                    notes.filter(note => note.archieved && (note.text.includes(search) || note.title.includes(search)))
+                    .map(archievedNote => {
                         return <NoteItemComponent 
-                                    note={activeNote} 
+                                    note={archievedNote} 
                                     onNoteComplete={(note: NoteModel) => this.completeNote(note)}
-                                    onNoteArchieve={(note: NoteModel) => this.archieveNote(note)}
-                                    onNoteDearchieve={() => {}}
+                                    onNoteArchieve={() => {}}
+                                    onNoteDearchieve={(note: NoteModel) => this.dearchieveNote(note)}
                                     onNoteDelete={(id: number) => this.deleteNote(id)}
-                                    key={activeNote.id}
+                                    key={archievedNote.id}
                                 >
-                                    {activeNote.text}
+                                    {archievedNote.text}
                                 </NoteItemComponent>;
                     })
                 }
@@ -79,4 +78,4 @@ function mapDispatchToProps(dispatch: any) {
 export default connect(
     mapStateToProps, 
     mapDispatchToProps)
-(NotesComponent);
+(ArchievedNotesComponent);

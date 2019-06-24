@@ -8,18 +8,18 @@
       "id": 1
     },
     {
-      "title": "Second note",
-      "text": "Fddsfssdfdfs",
-      "done": false,
-      "archieved": true,
-      "id": 2
-    },
-    {
       "title": "fdsagdfsgfhgffd",
       "text": "jgd ccv x shgvvbcx",
-      "done": false,
+      "done": true,
       "archieved": true,
       "id": 4
+    },
+    {
+      "title": "ghfhdaea",
+      "text": "fgnfgsa",
+      "done": false,
+      "archieved": true,
+      "id": 7
     }
   ]
 }

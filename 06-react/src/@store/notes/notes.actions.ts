@@ -109,3 +109,10 @@ export function deleteNoteError(): NotesActionTypes.DeleteNoteError {
         payload: 'Note Delete Failed'
     }
 }
+
+export function search(payload: string): NotesActionTypes.Search {
+    return {
+        type: NotesActionTypes.NotesActions.SEARCH,
+        payload
+    }
+}

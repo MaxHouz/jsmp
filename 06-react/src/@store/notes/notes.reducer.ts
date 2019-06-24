@@ -47,6 +47,12 @@ export function NotesReducer(state: NotesState = NotesInitialState, action: Note
                 error: null
             }
         }
+        case NotesActions.SEARCH: {
+            return {
+                ...state,
+                search: action.payload
+            }
+        }
         default: {
             return state;
         }

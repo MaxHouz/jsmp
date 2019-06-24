@@ -58,6 +58,7 @@ class AddNoteCompenent extends React.Component<AddNoteComponentProps, AddNoteCom
                     id='note-form-title'
                     control={Input}
                     placeholder='Title'
+                    className='add-note__title'
                     value={this.state.titleValue}
                     onChange={(evt: any) => this.updateTitleValue(evt)}
                 />
@@ -66,6 +67,7 @@ class AddNoteCompenent extends React.Component<AddNoteComponentProps, AddNoteCom
                     id='note-form-text'
                     control={TextArea}
                     placeholder='Note body'
+                    className='add-note__text'
                     value={this.state.textValue}
                     onChange={(evt: any) => this.updateTextValue(evt)}
                 />
