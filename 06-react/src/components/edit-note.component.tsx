@@ -1,28 +1,51 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { getNote } from '../api/notes-api';
+import { NoteModel } from '../models/note-model';
+import { RouteComponentProps } from 'react-router';
 import { Form, Input, TextArea, Button } from 'semantic-ui-react';
 import * as noteActions from '../@store/notes/notes.actions';
-import { NoteModel } from '../models/note-model';
 
-interface AddNoteComponentProps {
-    addNote: (note: NoteModel) => void
+interface EditNoteParams {
+    id: string;
 }
 
-interface AddNoteComponentState {
+interface EditNoteComponentProps extends RouteComponentProps<EditNoteParams> {
+    editNote: (note: NoteModel) => void,
+}
+
+interface EditNoteCompenentState {
+    note: NoteModel;
     titleValue: string;
-    textValue: string
+    textValue: string;
 }
 
-class AddNoteComponent extends React.Component<AddNoteComponentProps, AddNoteComponentState> {
+export class EditNoteCompenent extends React.Component<EditNoteComponentProps, EditNoteCompenentState> {
 
-    constructor(props: AddNoteComponentProps) {
+    constructor(props: EditNoteComponentProps) {
         super(props);
+    
         this.state = {
+            // @ts-ignore
+            note: null,
             titleValue: '',
             textValue: ''
         };
       }
-    
+
+    componentDidMount() {
+        const id =  this.props.match.params.id;
+
+        getNote(parseInt(id))
+            .then(res => this.setState(
+                {   
+                    note: res.data,
+                    titleValue: res.data.title,
+                    textValue: res.data.text
+                }
+            ));
+    }
+
     private updateTitleValue(event: any): void {
         this.setState({
             titleValue: event.target.value
@@ -34,25 +57,26 @@ class AddNoteComponent extends React.Component<AddNoteComponentProps, AddNoteCom
             textValue: event.target.value
         });
     }
-    
-    private addNote(): void {
-        this.props.addNote(
+
+    private editNote(): void{
+        const { done, archieved, id } = this.state.note;
+
+        this.props.editNote(
             new NoteModel(
                 this.state.titleValue,
                 this.state.textValue,
-                false,
-                false
+                done,
+                archieved,
+                id
             )
         )
-        this.setState({
-            titleValue: '',
-            textValue: ''
-        })
-    }
 
+        this.props.history.push('/');
+    }
     render() {
         return (
-            <Form>
+            <Form className="edit-note-form">
+                <h1>Edit note</h1>
                 <Form.Group>
                 <Form.Field
                     id='note-form-title'
@@ -72,10 +96,10 @@ class AddNoteComponent extends React.Component<AddNoteComponentProps, AddNoteCom
                     onChange={(evt: any) => this.updateTextValue(evt)}
                 />
                 <Button primary
-                    onClick={() => this.addNote()}
+                    onClick={() => this.editNote()}
                     disabled={!this.state.titleValue || !this.state.textValue}
                 >
-                    Add Note    
+                    Save   
                 </Button>
             </Form>
         )
@@ -84,7 +108,7 @@ class AddNoteComponent extends React.Component<AddNoteComponentProps, AddNoteCom
 
 function mapDispatchToProps(dispatch: any) {
     const actions = {
-        addNote: (note: NoteModel) => dispatch(noteActions.addNote(note))
+        editNote: (note: NoteModel) => dispatch(noteActions.updateNote(note))
     }
 
     return { ...actions };
@@ -93,4 +117,4 @@ function mapDispatchToProps(dispatch: any) {
 export default connect(
     undefined, 
     mapDispatchToProps)
-(AddNoteComponent);
+(EditNoteCompenent);

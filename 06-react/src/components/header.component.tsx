@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom'
-import AddNoteCompenent from './add-note.component';
+import AddNoteComponent from './add-note.component';
 import SearchComponent from './search.component';
 
 interface HeaderComponentState {
@@ -39,7 +39,7 @@ export class HeaderComponent extends React.Component<any, HeaderComponentState> 
                 </div>
             </div>
             <div className="add-note">
-                {this.state.addNoteOpen ? <AddNoteCompenent/> : null}
+                {this.state.addNoteOpen ? <AddNoteComponent/> : null}
             </div>
           </>
       )

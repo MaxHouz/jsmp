@@ -7,6 +7,7 @@ import { getNotesList } from './@store/notes/notes.actions';
 import { NotesInitialState } from './@store/notes/notes.state';
 import ArchievedNotesComponent from './components/archieved-notes.component';
 import { HeaderComponent } from './components/header.component';
+import EditNoteCompenent from './components/edit-note.component';
 
 const store = configureStore(NotesInitialState);
 store.dispatch<any>(getNotesList());
@@ -25,6 +26,10 @@ const App: React.FC = () => {
           <Route
             path="/archieve" 
             component={ArchievedNotesComponent} 
+          />
+          <Route
+            path="/edit/:id"
+            component={EditNoteCompenent}
           />
         </Switch> 
       </BrowserRouter>

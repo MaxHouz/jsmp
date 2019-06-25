@@ -43,3 +43,8 @@ code {
 .add-note__button {
   cursor: pointer;
 }
+
+.edit-note-form {
+  width: 600px;
+  margin-left: 50px;
+}

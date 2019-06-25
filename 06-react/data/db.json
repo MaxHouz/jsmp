@@ -1,25 +1,32 @@
 {
   "notes": [
     {
-      "title": "First note",
+      "title": "First edited",
       "text": "lorem  gdsadfsf bdggzdf cxv fbdfg dbgcvga ggxcvgzfxvcvdzvxbxlorem  gdsadfsf bdggzdf cxv fbdfg dbgcvga ggxcv   gzfxvcvdzvxbx",
       "done": false,
       "archieved": false,
       "id": 1
     },
     {
-      "title": "fdsagdfsgfhgffd",
+      "title": "Edited",
       "text": "jgd ccv x shgvvbcx",
-      "done": true,
+      "done": false,
       "archieved": true,
       "id": 4
     },
     {
-      "title": "ghfhdaea",
-      "text": "fgnfgsa",
+      "title": "Archieve",
+      "text": "edited",
       "done": false,
       "archieved": true,
       "id": 7
+    },
+    {
+      "title": "New note",
+      "text": "ggfdbf edited",
+      "done": false,
+      "archieved": true,
+      "id": 8
     }
   ]
 }
