@@ -1,0 +1,1 @@
+export const getNote = jest.fn(() => Promise.resolve({}))

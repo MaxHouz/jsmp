@@ -14,7 +14,7 @@ interface NotesComponentProps {
     deleteNote: (id: number) => void
 }
 
-class NotesComponent extends React.Component<NotesComponentProps, any> {
+export class NotesComponent extends React.Component<NotesComponentProps, any> {
 
     private completeNote(note: NoteModel): void {
         this.props.updateNote({
@@ -59,7 +59,7 @@ class NotesComponent extends React.Component<NotesComponentProps, any> {
     }
 }
 
-function mapStateToProps(state: NotesState): NotesState {
+export function mapStateToProps(state: NotesState): NotesState {
     return {
       notes: state.notes,
       error: state.error,
@@ -67,7 +67,7 @@ function mapStateToProps(state: NotesState): NotesState {
     }
 }
 
-function mapDispatchToProps(dispatch: any) {
+export function mapDispatchToProps(dispatch: any) {
     const actions = {
         updateNote: (note: NoteModel) => dispatch(noteActions.updateNote(note)),
         deleteNote: (id: number) => dispatch(noteActions.deleteNote(id))

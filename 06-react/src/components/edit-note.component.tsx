@@ -106,7 +106,7 @@ export class EditNoteCompenent extends React.Component<EditNoteComponentProps, E
     }
 }
 
-function mapDispatchToProps(dispatch: any) {
+export function mapDispatchToProps(dispatch: any) {
     const actions = {
         editNote: (note: NoteModel) => dispatch(noteActions.updateNote(note))
     }

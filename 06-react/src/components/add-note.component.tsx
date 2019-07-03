@@ -13,7 +13,7 @@ interface AddNoteComponentState {
     textValue: string
 }
 
-class AddNoteComponent extends React.Component<AddNoteComponentProps, AddNoteComponentState> {
+export class AddNoteComponent extends React.Component<AddNoteComponentProps, AddNoteComponentState> {
 
     constructor(props: AddNoteComponentProps) {
         super(props);
@@ -82,7 +82,7 @@ class AddNoteComponent extends React.Component<AddNoteComponentProps, AddNoteCom
     }
 }
 
-function mapDispatchToProps(dispatch: any) {
+export function mapDispatchToProps(dispatch: any) {
     const actions = {
         addNote: (note: NoteModel) => dispatch(noteActions.addNote(note))
     }

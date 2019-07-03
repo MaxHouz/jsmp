@@ -11,7 +11,7 @@ interface SearchComponentProps {
 interface SearchComponentState {
     searchValue: string
 }
-class SearchComponent extends React.Component<SearchComponentProps, SearchComponentState> {
+export class SearchComponent extends React.Component<SearchComponentProps, SearchComponentState> {
 
     constructor(props: SearchComponentProps) {
         super(props);
@@ -58,13 +58,13 @@ class SearchComponent extends React.Component<SearchComponentProps, SearchCompon
     }
 }
 
-function mapStateToProps(state: NotesState): { searchString: string } {
+export function mapStateToProps(state: NotesState): { searchString: string } {
     return {
         searchString: state.search
     }
 }
 
-function mapDispatchToProps(dispatch: any) {
+export function mapDispatchToProps(dispatch: any) {
     const actions = {
         search: (query: string) => dispatch(noteActions.search(query)),
     }
