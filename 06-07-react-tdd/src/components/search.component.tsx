@@ -74,5 +74,4 @@ export function mapDispatchToProps(dispatch: any) {
 
 export default connect(
     mapStateToProps, 
-    mapDispatchToProps)
-(SearchComponent);
+    mapDispatchToProps)(SearchComponent);

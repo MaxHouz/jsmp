@@ -1,16 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import NotesComponent from './components/notes.component';
-import { configureStore } from './@store/configure-store';
 import { Provider } from 'react-redux';
-import { getNotesList } from './@store/notes/notes.actions';
-import { NotesInitialState } from './@store/notes/notes.state';
 import ArchievedNotesComponent from './components/archieved-notes.component';
 import { HeaderComponent } from './components/header.component';
 import EditNoteCompenent from './components/edit-note.component';
-
-const store = configureStore(NotesInitialState);
-store.dispatch<any>(getNotesList());
+import { store } from './index'
 
 const App: React.FC = () => {
   return (

@@ -116,5 +116,4 @@ export function mapDispatchToProps(dispatch: any) {
 
 export default connect(
     undefined, 
-    mapDispatchToProps)
-(EditNoteCompenent);
+    mapDispatchToProps)(EditNoteCompenent);

@@ -92,5 +92,4 @@ export function mapDispatchToProps(dispatch: any) {
 
 export default connect(
     undefined, 
-    mapDispatchToProps)
-(AddNoteComponent);
+    mapDispatchToProps)(AddNoteComponent);

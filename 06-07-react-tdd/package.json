@@ -12,6 +12,7 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/jest": "24.0.15",
     "@types/node": "12.0.10",
     "@types/react": "16.8.22",
@@ -37,6 +38,14 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+        "**/*.{ts,tsx}",
+        "!**/node_modules/**",
+        "!**/*index.tsx",
+        "!**/*react-app-env.d.ts"
+    ]
   },
   "browserslist": {
     "production": [

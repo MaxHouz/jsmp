@@ -1,1 +1,0 @@
-export const getNotesList = jest.fn(() => Promise.resolve({}))

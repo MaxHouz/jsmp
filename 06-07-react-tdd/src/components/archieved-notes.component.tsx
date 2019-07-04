@@ -77,5 +77,4 @@ export function mapDispatchToProps(dispatch: any) {
 
 export default connect(
     mapStateToProps, 
-    mapDispatchToProps)
-(ArchievedNotesComponent);
+    mapDispatchToProps)(ArchievedNotesComponent);

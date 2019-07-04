@@ -87,7 +87,7 @@ export function updateNoteError(): NotesActionTypes.UpdateNoteError {
 export function deleteNote(id: number): ThunkAction<Promise<Action>, NotesState, void, Action> {
     return async (dispatch: Dispatch): Promise<Action> => {
         try {
-            const res = await notesApi.deleteNote(id);
+            await notesApi.deleteNote(id);
 
             return dispatch(deleteNoteSuccess(id));
         } catch {

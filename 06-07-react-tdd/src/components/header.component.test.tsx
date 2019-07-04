@@ -17,6 +17,7 @@ describe('HeaderComponent', () => {
         component.find('.add-note__button').simulate('click');
         component.update();
 
+        //@ts-ignore
         expect(component.state().addNoteOpen).toEqual(true);
     })
 })
