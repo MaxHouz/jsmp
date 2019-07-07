@@ -91,7 +91,7 @@ export function deleteNote(id: number): ThunkAction<Promise<Action>, NotesState,
 
             return dispatch(deleteNoteSuccess(id));
         } catch {
-            return dispatch(updateNoteError());
+            return dispatch(deleteNoteError());
         }
     }
 }

@@ -14,6 +14,7 @@ describe('NoteItemComponents', () => {
         id: 4
     }
     const onNoteCompleteMock = jest.fn();
+    const onNoteUncompleteMock = jest.fn();
     const onNoteArchieveMock = jest.fn();
     const onNoteDearchieveMock = jest.fn();
     const onNoteDeleteMock = jest.fn();
@@ -23,6 +24,7 @@ describe('NoteItemComponents', () => {
             <NoteItemComponent 
                 note={mockNote}
                 onNoteComplete={onNoteCompleteMock}
+                onNoteUncomplete={onNoteUncompleteMock}
                 onNoteArchieve={onNoteArchieveMock}
                 onNoteDearchieve={onNoteDearchieveMock}
                 onNoteDelete={onNoteDeleteMock}
@@ -35,9 +37,32 @@ describe('NoteItemComponents', () => {
     })
 
     it('should complete note', () => {
+        const mockUncompleteNote = {
+            title: 'mockTitle',
+            text: 'mockText',
+            done: false,
+            archieved: false,
+            id: 4
+        }
+        const component = shallow(
+            <NoteItemComponent 
+                note={mockUncompleteNote}
+                onNoteComplete={onNoteCompleteMock}
+                onNoteUncomplete={onNoteUncompleteMock}
+                onNoteArchieve={onNoteArchieveMock}
+                onNoteDearchieve={onNoteDearchieveMock}
+                onNoteDelete={onNoteDeleteMock}
+            />
+        );
         component.find('Button').at(0).simulate('click');
 
-        expect(onNoteCompleteMock).toHaveBeenCalledWith(mockNote);
+        expect(onNoteCompleteMock).toHaveBeenCalledWith(mockUncompleteNote);
+    })
+
+    it('should uncomplete note', () => {
+        component.find('Button').at(0).simulate('click');
+
+        expect(onNoteUncompleteMock).toHaveBeenCalledWith(mockNote);
     })
 
     it('should archieve note', () => {

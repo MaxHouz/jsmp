@@ -23,6 +23,13 @@ export class ArchievedNotesComponent extends React.Component<ArchievedNotesCompo
         });
     }
 
+    private uncompleteNote(note: NoteModel): void {
+        this.props.updateNote({
+            ...note,
+            done: false
+        });
+    }
+
     private dearchieveNote(note: NoteModel): void {
         this.props.updateNote({
             ...note,
@@ -44,6 +51,7 @@ export class ArchievedNotesComponent extends React.Component<ArchievedNotesCompo
                         return <NoteItemComponent 
                                     note={archievedNote} 
                                     onNoteComplete={(note: NoteModel) => this.completeNote(note)}
+                                    onNoteUncomplete={(note: NoteModel) => this.uncompleteNote(note)}
                                     onNoteArchieve={() => {}}
                                     onNoteDearchieve={(note: NoteModel) => this.dearchieveNote(note)}
                                     onNoteDelete={(id: number) => this.deleteNote(id)}

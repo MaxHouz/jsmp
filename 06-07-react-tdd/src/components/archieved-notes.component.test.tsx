@@ -45,6 +45,14 @@ describe('ArchievedNotesComponent', () => {
         })
     })
 
+    it('should update note state on uncomplete', () => {
+        component.find('NoteItemComponent').prop('onNoteUncomplete')(mockNotes[0]);
+        expect(updateNoteMock).toHaveBeenCalledWith({
+            ...mockNotes[0], 
+            done: false
+        })
+    })
+    
     it('should update note state on dearchieve', () => {
         component.find('NoteItemComponent').prop('onNoteDearchieve')(mockNotes[0]);
         expect(updateNoteMock).toHaveBeenCalledWith({

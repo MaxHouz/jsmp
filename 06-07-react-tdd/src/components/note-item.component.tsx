@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 interface NoteProps {
     note: NoteModel,
     onNoteComplete: (note: NoteModel) => void,
+    onNoteUncomplete: (note: NoteModel) => void,
     onNoteArchieve: (note: NoteModel) => void,
     onNoteDearchieve: (note: NoteModel) => void,
     onNoteDelete: (id: number) => void
@@ -24,12 +25,19 @@ export class NoteItemComponent extends React.Component<NoteProps> {
                     <Link className='note-card__edit' to={{ pathname: `/edit/${id}` }}>Edit</Link>
                 </Card.Content>
                 <Card.Content extra>
-                    <Button
-                        onClick={() => this.props.onNoteComplete(this.props.note)}
-                        icon="check" 
-                        color="green" 
-                        disabled={done}>
-                    </Button>
+                    {
+                        done
+                        ? (<Button
+                            onClick={() => this.props.onNoteUncomplete(this.props.note)}
+                            icon="remove" 
+                            color="teal">
+                          </Button>)
+                        : (<Button
+                            onClick={() => this.props.onNoteComplete(this.props.note)}
+                            icon="check" 
+                            color="green">
+                          </Button>)
+                    }
                     {
                         archieved 
                         ? (<Button

@@ -7,14 +7,37 @@ describe('notes actions', () => {
     const dispatch = jest.fn();
     const getState = jest.fn();
 
+    afterEach(() => {
+        jest.resetModules();
+    })
+
     describe('get notes list', () => {
 
         it('should update notes list on resolve', async() => {
+            jest.doMock('../../api/notes-api', () => ({
+                getNotesList: () => Promise.resolve([]),
+            }));
+            const noteActions = require('./notes.actions')
+
             await noteActions.getNotesList()(dispatch, getState, undefined);
 
             expect(dispatch).toHaveBeenCalledWith({
                 payload: undefined,
                 type: NotesActionTypes.NotesActions.GET_NOTES_LIST_SUCCESS
+            });
+        });
+
+        it('should set error to state on reject', async() => {
+            jest.doMock('../../api/notes-api', () => ({
+                getNotesList: () => Promise.reject('ERR'),
+            }));
+            const noteActions = require('./notes.actions')
+
+            await noteActions.getNotesList()(dispatch, getState, undefined);
+
+            expect(dispatch).toHaveBeenCalledWith({
+                payload: 'Notes loading failed',
+                type: NotesActionTypes.NotesActions.GET_NOTES_LIST_ERROR
             });
         })
 
@@ -24,11 +47,30 @@ describe('notes actions', () => {
     describe('add note', () => {
         
         it('should update state with new note on resolve', async() => {
-            await noteActions.addNote({} as NoteModel)(dispatch, getState, undefined);
+            jest.doMock('../../api/notes-api', () => ({
+                addNote: () => Promise.resolve([]),
+            }));
+            const noteActions = require('./notes.actions')
+
+            await noteActions.addNote()(dispatch, getState, undefined);
 
             expect(dispatch).toHaveBeenCalledWith({
                 payload: undefined,
                 type: NotesActionTypes.NotesActions.ADD_NOTE_SUCCESS
+            });
+        });
+
+        it('should set error to state on reject', async() => {
+            jest.doMock('../../api/notes-api', () => ({
+                addNote: () => Promise.reject('ERR'),
+            }));
+            const noteActions = require('./notes.actions')
+
+            await noteActions.addNote()(dispatch, getState, undefined);
+
+            expect(dispatch).toHaveBeenCalledWith({
+                payload: 'Adding Note Failed',
+                type: NotesActionTypes.NotesActions.ADD_NOTE_ERROR
             });
         })
 
@@ -37,11 +79,30 @@ describe('notes actions', () => {
     describe('update note', () => {
 
         it('should update state with updated on resolve', async() => {
-            await noteActions.updateNote({} as NoteModel)(dispatch, getState, undefined);
+            jest.doMock('../../api/notes-api', () => ({
+                updateNote: () => Promise.resolve([]),
+            }));
+            const noteActions = require('./notes.actions')
+
+            await noteActions.updateNote()(dispatch, getState, undefined);
 
             expect(dispatch).toHaveBeenCalledWith({
                 payload: undefined,
                 type: NotesActionTypes.NotesActions.UDPATE_NOTE_SUCCESS
+            });
+        });
+
+        it('should set error to state on reject', async() => {
+            jest.doMock('../../api/notes-api', () => ({
+                updateNote: () => Promise.reject('ERR'),
+            }));
+            const noteActions = require('./notes.actions')
+
+            await noteActions.updateNote()(dispatch, getState, undefined);
+
+            expect(dispatch).toHaveBeenCalledWith({
+                payload: 'Note Update Failed',
+                type: NotesActionTypes.NotesActions.UPDATE_NOTE_ERROR
             });
         })
 
@@ -49,12 +110,32 @@ describe('notes actions', () => {
 
     describe('delete note', () => {
 
+
         it('should delete note from state on resolve', async() => {
-            await noteActions.deleteNote(3)(dispatch, getState, undefined);
+            jest.doMock('../../api/notes-api', () => ({
+                deleteNote: () => Promise.resolve([]),
+            }));
+            const noteActions = require('./notes.actions')
+
+            await noteActions.deleteNote(2)(dispatch, getState, undefined);
 
             expect(dispatch).toHaveBeenCalledWith({
-                payload: 3,
+                payload: 2,
                 type: NotesActionTypes.NotesActions.DELETE_NOTE_SUCCESS
+            });
+        });
+
+        it('should set error to state on reject', async() => {
+            jest.doMock('../../api/notes-api', () => ({
+                deleteNote: () => Promise.reject('ERR'),
+            }));
+            const noteActions = require('./notes.actions')
+
+            await noteActions.deleteNote(2)(dispatch, getState, undefined);
+
+            expect(dispatch).toHaveBeenCalledWith({
+                payload: 'Note Delete Failed',
+                type: NotesActionTypes.NotesActions.DELETE_NOTE_ERROR
             });
         })
 
