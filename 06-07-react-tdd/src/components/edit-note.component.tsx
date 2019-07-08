@@ -43,7 +43,8 @@ export class EditNoteCompenent extends React.Component<EditNoteComponentProps, E
                     titleValue: res.data.title,
                     textValue: res.data.text
                 }
-            ));
+            ))
+            .catch(() => null);
     }
 
     private updateTitleValue(event: any): void {
