@@ -1,0 +1,1 @@
+export const composeWithDevTools = jest.fn(() => 'composed');

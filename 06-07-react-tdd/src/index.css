@@ -1,0 +1,50 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.notes {
+  margin-left: 20px;
+}
+
+.note-card {
+  position: relative;
+}
+
+.note-card__edit {
+  position: absolute;
+  right: 3%;
+  top: 3%;
+}
+
+.add-note {
+  width: 400px;
+  margin-bottom: 20px;
+  margin-left: 160px;
+}
+
+.add-note__title {
+  border: none;
+}
+
+.add-note__text {
+  border: none;
+}
+
+.add-note__button {
+  cursor: pointer;
+}
+
+.edit-note-form {
+  width: 600px;
+  margin-left: 50px;
+}
