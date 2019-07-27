@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
 import { styles } from "./styles";
 
@@ -12,28 +12,23 @@ const initState = {
   result: 0,
   allOperations: [],
   currentNumber: 0,
-  hex: true, // HEX, false is for DEC
+  hex: false
 };
 
-export default class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      ...initState,
-    }
+export default App = () => {
+  const [result, setResult] = useState(initState.result);
+  const [allOperations, setAllOperations] = useState(initState.allOperations);
+  const [currentNumber, setCurrentNumber] = useState(initState.currentNumber);
+  const [hex, setHex] = useState(initState.hex);
 
-    // TODO: handle all Operations
-    // TODO: current number 0 == nothing
-  }
-
-  onControlPress = (control) => {
+  const onControlPress = (control) => {
     switch (control) {
       case 'AC': {
-        this.clear();
+        clear();
         break;
       }
       case '=': {
-        this.calculate();
+        calculate();
         break;
       }
       default: {
@@ -42,79 +37,91 @@ export default class App extends React.Component {
     }
   };
 
-  onOperationPress = (action) => {
-    const { currentNumber, allOperations, hex } = this.state;
-    allOperations.push({
-      hex: hex,
-      value: currentNumber,
-      action
-    });
-    this.setState({
-      allOperations,
-      currentNumber: 0
-    });
+  const onOperationPress = (action) => {
+    let newOperations = [];
+
+    if (result && !currentNumber) {
+      newOperations = [{
+        hex: hex,
+        value: hex ? result.replace('0x', ''): result,
+        action
+      }];
+    } else if(result && !!allOperations.length && currentNumber) {
+      newOperations.push({
+        hex: hex,
+        value: currentNumber,
+        action
+      });
+      setResult(initState.result);
+    } else {
+      newOperations = [...allOperations];
+      newOperations.push({
+        hex: hex,
+        value: currentNumber,
+        action
+      });
+    }
+
+    setAllOperations(newOperations);
+    setCurrentNumber(initState.currentNumber);
   };
 
-  onValuePress = (value) => {
-    const { currentNumber: _currNumber } = this.state;
-    const currentNumber = _currNumber ? _currNumber : '';
-
-    this.setState({
-      currentNumber: `${currentNumber}${value}`,
-    })
+  const onValuePress = (value) => {
+    const prevCurrentNumber = currentNumber || '';
+    setCurrentNumber(`${prevCurrentNumber}${value}`);
   };
 
-  clear = () => {
-    this.setState({
-      allOperations: [],
-      currentNumber: 0,
-      result: 0
-    });
+  const clear = () => {
+    setResult(initState.result);
+    setAllOperations(initState.allOperations);
+    setCurrentNumber(initState.currentNumber);
   };
 
-  calculate = () => {
-    const { currentNumber, allOperations, hex } = this.state;
-    allOperations.push({
+  const calculate = () => {
+    const newOperations = [ ...allOperations ];
+    if (!currentNumber) return;
+
+    newOperations.push({
       hex: hex,
       value: currentNumber
     });
+    setAllOperations(newOperations);
+
+    const newResult = hex
+        ? `0x${eval(convertOperations(newOperations)).toString(16).toUpperCase()}`
+        : eval(convertOperations(newOperations)).toString();
+
+    setCurrentNumber(initState.currentNumber);
+    setResult(newResult);
   };
 
-  switchHandler = (val) => {
-    this.setState({
-      hex: val,
-      currentNumber: 0
-    });
+  const switchHandler = (val) => {
+    setHex(val);
+    setCurrentNumber(0);
+    const newResult = val ? `0x${parseInt(result).toString(16).toUpperCase()}` : parseInt(result.toString());
+    setResult(newResult);
   };
 
-  render() {
-    const { result, allOperations, currentNumber, hex } = this.state;
-    const resString = result.toString();
-    const resCurrentNumber = currentNumber.toString();
-    const resAllOperations = !!allOperations.length ? convertOperations(allOperations) : '';
-
-    return (
-        <View style={styles.container}>
-          <Results
-              hex={hex}
-              result={resString}
-              allOperations={resAllOperations}
-              currentNumber={resCurrentNumber}
-          />
-          <ControlButtons
-              hex={hex}
-              switchHex={(val) => this.switchHandler(val)}
-              onPress={(control) => this.onControlPress(control)}
-          />
-          <OperationButtons
-              onPress={(action) => this.onOperationPress(action)}
-          />
-          <ValueButtons
-              hex={hex}
-              onPress={(value) => this.onValuePress(value)}
-          />
-        </View>
-    );
-  }
-}
-
+  return (
+      <View style={styles.container}>
+        <Results
+            hex={hex}
+            result={result.toString()}
+            allOperations={!!allOperations.length ? convertOperations(allOperations) : ''}
+            currentNumber={currentNumber.toString()}
+        />
+        <ControlButtons
+            hex={hex}
+            switchHex={(val) => switchHandler(val)}
+            onPress={(control) => onControlPress(control)}
+        />
+        <OperationButtons
+            onPress={(action) => onOperationPress(action)}
+        />
+        <ValueButtons
+            hex={hex}
+            onPress={(value) => onValuePress(value)}
+        />
+      </View>
+  );
+};

@@ -12,7 +12,7 @@ export const CalcBtn = ({onPress, styleContainer, disabled, title}) => {
 
     return (
         <TouchableOpacity
-            onPress={disabled ? () => {} : () => { onPress(title) }}
+            onPress={disabled ? () => {} : () => {onPress(title)}}
             style={_style}
             activeOpacity={disabled ? 1 : 0.5}
         >
