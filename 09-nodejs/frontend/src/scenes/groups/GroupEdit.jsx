@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import GroupForm from '../../components/GroupForm';
 
-export default class GroupAdd extends PureComponent {
-    handleGroupAdd = async (group) => {
+export default class GroupEdit extends PureComponent {
+    handleGroupEdit = async (group) => {
 
     };
 
@@ -15,7 +15,7 @@ export default class GroupAdd extends PureComponent {
                             <ol className="breadcrumb">
                                 <li className="breadcrumb-item"><a href="#/">Home</a></li>
                                 <li className="breadcrumb-item"><a href="#/groups">Groups</a></li>
-                                <li className="breadcrumb-item active" aria-current="page">Add group</li>
+                                <li className="breadcrumb-item active" aria-current="page">Edit group</li>
                             </ol>
                         </nav>
                     </div>
@@ -24,7 +24,7 @@ export default class GroupAdd extends PureComponent {
                 <div className="row">
                     <div className="col">
                         <GroupForm 
-                            onSubmit={this.handleGroupAdd} 
+                            onSubmit={this.handleGroupEdit} 
                         />
                     </div>
                 </div>
