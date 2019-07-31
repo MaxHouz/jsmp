@@ -3,7 +3,7 @@ const {sendRequest} = require('../utils/request');
 
 module.exports = {
     getDevices,
-    getDevicesById,
+    getDeviceById,
     addDevice,
     removeDevice,
     updateDevice
@@ -35,7 +35,7 @@ async function getDevices() {
     return devices.map(deviceAdapter);
 }
 
-async function getDevicesById(deviceId) {
+async function getDeviceById(deviceId) {
     const device = await Device.findById(deviceId).exec();
 
     if (device) {
@@ -49,6 +49,7 @@ async function addDevice(deviceData) {
     const device = new Device({
         log: [],
         state: 'off',
+        groupId: null,
         ...deviceData
     });
 

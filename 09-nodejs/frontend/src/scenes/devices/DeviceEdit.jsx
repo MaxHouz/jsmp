@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
-import DeviceForm from '../components/DeviceForm';
-import { getDeviceById, updateDevice } from '../api';
+import DeviceForm from '../../components/DeviceForm';
+import { getDeviceById, updateDevice } from '../../api';
 
 export default class DeviceEdit extends PureComponent {
     state = {

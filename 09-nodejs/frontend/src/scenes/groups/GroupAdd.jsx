@@ -1,11 +1,9 @@
 import React, { PureComponent } from 'react';
-import DeviceForm from '../components/DeviceForm';
-import { addDevice } from '../api';
+import GroupForm from '../../components/GroupForm';
 
-export default class DeviceAdd extends PureComponent {
-    handleFormSubmit = async (device) => {
-        await addDevice(device);
-        window.history.back();
+export default class GroupAdd extends PureComponent {
+    handleFormSubmit = async (group) => {
+
     };
 
     render() {
@@ -16,8 +14,8 @@ export default class DeviceAdd extends PureComponent {
                         <nav aria-label="breadcrumb">
                             <ol className="breadcrumb">
                                 <li className="breadcrumb-item"><a href="#/">Home</a></li>
-                                <li className="breadcrumb-item"><a href="#/devices">Devices</a></li>
-                                <li className="breadcrumb-item active" aria-current="page">Add device</li>
+                                <li className="breadcrumb-item"><a href="#/groups">Groups</a></li>
+                                <li className="breadcrumb-item active" aria-current="page">Add group</li>
                             </ol>
                         </nav>
                     </div>
@@ -25,7 +23,7 @@ export default class DeviceAdd extends PureComponent {
 
                 <div className="row">
                     <div className="col">
-                        <DeviceForm onSubmit={this.handleFormSubmit} />
+                        <GroupForm onSubmit={this.handleFormSubmit} />
                     </div>
                 </div>
             </div>

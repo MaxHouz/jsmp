@@ -1,5 +1,5 @@
 import React from 'react';
-import GroupItem from '../components/GroupItem';
+import GroupItem from '../../components/GroupItem';
 
 export default function() {
     return (

@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { getDeviceById, getDeviceLog } from '../api';
+import { getDeviceById, getDeviceLog } from '../../api';
 
 export default class DeviceLog extends PureComponent {
     state = {

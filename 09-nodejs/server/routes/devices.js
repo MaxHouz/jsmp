@@ -5,13 +5,12 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     const devices = await devicesService.getDevices();
-    console.log(devices);
     res.json(devices);
 });
 
 router.get('/:id', async (req, res) => {
     const {id} = req.params;
-    const device = await devicesService.getDevicesById(id);
+    const device = await devicesService.getDeviceById(id);
 
     if (device) {
         res.json(device);
@@ -23,7 +22,7 @@ router.get('/:id', async (req, res) => {
 
 router.get('/log/:id', async (req, res) => {
     const {id} = req.params;
-    const device = await devicesService.getDevicesById(id);
+    const device = await devicesService.getDeviceById(id);
     if (device) {
         res.json(device.log);
     } else {
