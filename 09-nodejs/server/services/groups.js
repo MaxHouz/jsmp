@@ -1,5 +1,4 @@
 const Group = require('../models/group');
-const {sendRequest} = require('../utils/request');
 const devicesService = require('../services/devices');
 
 module.exports = {
@@ -7,7 +6,8 @@ module.exports = {
     getGroupById,
     addGroup,
     removeGroup,
-    updateGroup
+    updateGroup,
+    updateGroupState
 };
 
 function groupAdapter(group) {
@@ -55,5 +55,20 @@ async function updateGroup(groupId, data) {
         return null;
     }
 
-    return await Group.findByIdAndUpdate(groupId, { ...data }).exec();
+    return await Group.findByIdAndUpdate(groupId, {...data}).exec();
+}
+
+async function updateGroupState(groupId, data) {
+    const group = awaitGroup.findById(groupId);
+    const {state} = data;
+
+    if (!group) {
+        return null;
+    }
+
+    group.devices.forEach(device => {
+        await devicesService.updateDevice(device.id, {state})
+    });
+
+    return await Group.findByIdAndUpdate(groupId, {state});
 }

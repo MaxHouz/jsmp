@@ -48,4 +48,16 @@ router.patch('/:id', async (req, res) => {
     }
 });
 
+router.patch('/state/:id', async (req, res) => {
+    const {id} = req.params;
+    const stateData = req.body;
+
+    try {
+        await groupsService.updateGroupState(id, stateData);
+        res.sendStatus(200);
+    } catch {
+        res.sendStatus(500);
+    }
+});
+
 module.exports = router;

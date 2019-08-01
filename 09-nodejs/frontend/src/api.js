@@ -74,6 +74,10 @@ export async function updateGroup(groupId, data) {
     await axios.patch(`${API_URL}/groups/${groupId}`, data);
 }
 
+export async function switchGroupState(groupId, state) {
+    await axios.patch(`${API_URL}/groups/state/${groupId}`, {state});
+}
+
 function getFormattedDate() {
     let date = new Date();
     return `${date.getFullYear()}-${(date.getMonth() + 1)}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
