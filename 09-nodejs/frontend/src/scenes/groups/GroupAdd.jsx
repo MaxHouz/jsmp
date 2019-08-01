@@ -1,9 +1,11 @@
 import React, { PureComponent } from 'react';
 import GroupForm from '../../components/GroupForm';
+import { addGroup } from '../../api'
 
 export default class GroupAdd extends PureComponent {
     handleGroupAdd = async (group) => {
-
+        await addGroup(group);
+        window.history.back();
     };
 
     render() {
@@ -23,7 +25,7 @@ export default class GroupAdd extends PureComponent {
 
                 <div className="row">
                     <div className="col">
-                        <GroupForm 
+                        <GroupForm
                             onSubmit={this.handleGroupAdd} 
                         />
                     </div>

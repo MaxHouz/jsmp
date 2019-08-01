@@ -1,12 +1,34 @@
 import React, { PureComponent } from 'react';
 import GroupForm from '../../components/GroupForm';
+import {getGroupById, updateGroup} from "../../api";
 
 export default class GroupEdit extends PureComponent {
-    handleGroupEdit = async (group) => {
+    state = {
+        device: null
+    };
 
+    componentDidMount = async () => {
+        const { id } = this.props.match.params;
+
+        this.setState({
+            group: await getGroupById(id)
+        });
+    };
+
+    handleGroupEdit = async (group) => {
+        const { id } = this.props.match.params;
+
+        await updateGroup(id, group);
+        window.history.back();
     };
 
     render() {
+        const {group} = this.state;
+
+        if (!group) {
+            return null;
+        }
+
         return (
             <div className="container">
                 <div className="row mt-4">
@@ -23,7 +45,8 @@ export default class GroupEdit extends PureComponent {
 
                 <div className="row">
                     <div className="col">
-                        <GroupForm 
+                        <GroupForm
+                            group={group}
                             onSubmit={this.handleGroupEdit} 
                         />
                     </div>

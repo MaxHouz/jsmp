@@ -1,8 +1,15 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { devicePropType } from '../constants';
+import {removeGroup} from "../api";
 
-export default class DeviceItem extends PureComponent {
+export default class GroupItem extends PureComponent {
+    handleDelete = async () => {
+        const {group, onUpdate} = this.props;
+
+        await removeGroup(group.id);
+        onUpdate();
+    };
+
     render() {
         const { index, group } = this.props;
 
@@ -12,13 +19,19 @@ export default class DeviceItem extends PureComponent {
                 <td>{group.name}</td>
                 <td className="text-right">
                     <div className="btn-group mr-4" role="group">
-                        <button type="button" className="btn btn-outline-primary">On</button>
-                        <button type="button" className="btn btn-outline-primary">Off</button>
+                        <button type="button"
+                                className={`btn btn-outline-primary ${group.state === 'on' ? 'active' : ''}`}>
+                            On
+                        </button>
+                        <button type="button"
+                                className={`btn btn-outline-primary ${group.state === 'off' ? 'active' : ''}`}>
+                            Off
+                        </button>
                     </div>
 
                     <div className="btn-group" role="group">
                         <a href={`#/groups/edit/${group.id}`} className="btn btn-outline-secondary">Edit</a>
-                        <button type="button" className="btn btn-danger">Delete</button>
+                        <button type="button" className="btn btn-danger" onClick={this.handleDelete}>Delete</button>
                     </div>
                 </td>
             </tr>
@@ -26,13 +39,13 @@ export default class DeviceItem extends PureComponent {
     }
 }
 
-DeviceItem.defaultProps = {
+GroupItem.defaultProps = {
     onUpdate: () => {}
 };
 
-DeviceItem.propTypes = {
+GroupItem.propTypes = {
     group: PropTypes.shape({
-        id: PropTypes.number.isRequired,
+        id: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired
     }),
     index: PropTypes.number.isRequired,

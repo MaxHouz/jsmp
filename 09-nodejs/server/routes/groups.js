@@ -36,4 +36,16 @@ router.delete('/:id', async (req, res) => {
     res.sendStatus(201);
 });
 
+router.patch('/:id', async (req, res) => {
+    const {id} = req.params;
+    const groupData = req.body;
+
+    try {
+        await groupsService.updateGroup(id, groupData);
+        res.sendStatus(200);
+    } catch {
+        res.sendStatus(500);
+    }
+});
+
 module.exports = router;

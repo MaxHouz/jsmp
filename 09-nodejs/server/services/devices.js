@@ -10,7 +10,7 @@ module.exports = {
 };
 
 function deviceAdapter(device) {
-    const {_id, name, address, port, state, log, groupId} = device;
+    const {_id, name, address, port, state, log} = device;
     const mappedLog = log.map(deviceLog => {
         return {
             date: deviceLog.date,
@@ -24,7 +24,6 @@ function deviceAdapter(device) {
         address,
         port,
         state,
-	    groupId,
         log: mappedLog
     }
 }

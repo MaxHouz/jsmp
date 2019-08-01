@@ -6,7 +6,8 @@ module.exports = {
     getGroups,
     getGroupById,
     addGroup,
-    removeGroup
+    removeGroup,
+    updateGroup
 };
 
 function groupAdapter(group) {
@@ -45,4 +46,14 @@ async function addGroup(groupData) {
 
 async function removeGroup(groupId) {
     return await Group.findByIdAndDelete(groupId).exec();
+}
+
+async function updateGroup(groupId, data) {
+    const group = await Group.findById(groupId);
+
+    if (!group) {
+        return null;
+    }
+
+    return await Group.findByIdAndUpdate(groupId, { ...data }).exec();
 }

@@ -6,10 +6,10 @@ import { getDevices } from '../api';
 export default class GroupForm extends PureComponent {
     constructor(props) {
         super(props);
-        
         this.state = {
             devices: [],
-            selectedDevices: []
+            selectedDevices: [],
+            group: {...props.group}
         }
     }
 
@@ -18,52 +18,71 @@ export default class GroupForm extends PureComponent {
     }
 
     loadDevices = async () => {
-        // TODO: add devices from group to selectedDevices
+        const { group } = this.state;
+        const devices = await getDevices();
+        const filteredDevices = devices.filter(device => group.devices.indexOf(device.id) === -1);
+        const selectedDevices = devices.filter(device => group.devices.indexOf(device.id) !== -1);
+
         this.setState({
-            devices: await getDevices()
+            devices: [...filteredDevices],
+            selectedDevices: [...selectedDevices]
         })
-    }
+    };
 
     addDevice = (event) => {
+        const {group} = this.state;
         const {devices, selectedDevices} = this.state;
         const deviceId = event.target.value;
         const index = devices.findIndex(device => device.id === deviceId);
         const selectedDevice = devices.splice(index, 1);
+        const updatedGroupDevices = [...group.devices, deviceId];
         event.target.value = null;
         this.setState({
             devices: [...devices],
-            selectedDevices: [...selectedDevices, selectedDevice[0]]
+            selectedDevices: [...selectedDevices, selectedDevice[0]],
+            group: {
+                ...group,
+                devices: updatedGroupDevices
+            }
         });
-    }
+    };
 
     removeDevice = (id) => {
+        const {group} = this.state;
         const {devices, selectedDevices} = this.state;
         const index = selectedDevices.findIndex(device => device.id === id);
         const removedDevice = selectedDevices.splice(index, 1);
-
+        const updatedGroupDevices = group.devices.filter(device => device.id !== id);
         this.setState({
             devices: [...devices, removedDevice[0]],
-            selectedDevices: [...selectedDevices]
+            selectedDevices: [...selectedDevices],
+            group: {
+                ...group,
+                devices: updatedGroupDevices
+            }
         });
     };
 
     handleCancel = () => {
         window.history.back();
-    }
+    };
 
-    addGroup = () => {
-        // updating groups logic
-        window.history.back();
-    }
+    addGroup = (event) => {
+        this.props.onSubmit({
+            ...this.state.group,
+            name: event.target.groupName.value
+        });
+
+        event.preventDefault();
+    };
 
     render() {
-        const {group} = this.props;
-        const {devices, selectedDevices} = this.state;
+        const {devices, selectedDevices, group} = this.state;
 
         return (
-            <form>
-                <div className="form-group">
-                    <label htmlFor="deviceName">Device Name</label>
+            <form onSubmit={this.addGroup}>
+                 <div className="form-group">
+                    <label htmlFor="deviceName">Group Name</label>
                     <input type="text"
                             className="form-control"
                             id="groupName"
@@ -82,8 +101,7 @@ export default class GroupForm extends PureComponent {
                             Select device
                         </option>
                         {   
-                            devices.filter(device => !device.groupId)
-                                .map(device => {
+                            devices.map(device => {
                                     return (
                                         <option
                                             value={device.id}
@@ -102,8 +120,7 @@ export default class GroupForm extends PureComponent {
                         <li className="list-group-item" key={index}>
                             {device.name}
                             <button type="button" 
-                                    className="close" 
-                                    index={index} 
+                                    className="close"
                                     aria-label="Close" 
                                     onClick={() => {this.removeDevice(device.id)}}>
                             <span aria-hidden="true">&times;</span>
@@ -116,7 +133,6 @@ export default class GroupForm extends PureComponent {
                     <button 
                             type="submit" 
                             className="btn btn-primary mr-2"
-                            onClick={this.addGroup}
                     >
                         Submit  
                     </button>

@@ -5,7 +5,6 @@ const Device = mongoose.model('Device', {
     address: String,
     port: Number,
     state: String,
-    groupId: String,
     log: [{
         date: String,
         action: String
