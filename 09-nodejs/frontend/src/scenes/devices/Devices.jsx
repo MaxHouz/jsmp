@@ -49,7 +49,7 @@ export default class Devices extends PureComponent {
                                 <th scope="col">#</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Address</th>
-                                <th scope="col">Actions</th>
+                                <th scope="col"></th>
                             </tr>
                             </thead>
                             <tbody>

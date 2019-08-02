@@ -59,15 +59,15 @@ async function updateGroup(groupId, data) {
 }
 
 async function updateGroupState(groupId, data) {
-    const group = awaitGroup.findById(groupId);
-    const {state} = data;
+    const group = await Group.findById(groupId);
+    const {state, log} = data;
 
     if (!group) {
         return null;
     }
 
-    group.devices.forEach(device => {
-        await devicesService.updateDevice(device.id, {state})
+    group.devices.forEach(async (deviceId) => {
+        await devicesService.updateDevice(deviceId, {state, log})
     });
 
     return await Group.findByIdAndUpdate(groupId, {state});

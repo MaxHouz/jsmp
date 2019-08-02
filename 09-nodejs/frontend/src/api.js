@@ -75,7 +75,13 @@ export async function updateGroup(groupId, data) {
 }
 
 export async function switchGroupState(groupId, state) {
-    await axios.patch(`${API_URL}/groups/state/${groupId}`, {state});
+    await axios.patch(`${API_URL}/groups/state/${groupId}`, {
+        state,
+        log: {
+            date: getFormattedDate(),
+            action: state
+        }
+    });
 }
 
 function getFormattedDate() {
