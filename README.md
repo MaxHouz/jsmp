@@ -6,3 +6,5 @@
 - [RxJs](05-rx-js)
 - [React/TDD](06-07-react-tdd)
 - [JavaScript security](08-js-security)
+- [Node.js](09-nodejs)
+- [React Native](10-react-native)
